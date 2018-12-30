@@ -5,17 +5,32 @@
  */
 package omamgkirjasto;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author lentt
  */
 public class MgKirjasto extends javax.swing.JFrame {
 
+    luoYhteys db = new luoYhteys();
+
     /**
      * Creates new form MgKirjasto
      */
-    public MgKirjasto() {
+    public MgKirjasto() throws ClassNotFoundException, SQLException {
         initComponents();
+        tableload1(tbManga);
+        comboload(comboManga);
     }
 
     /**
@@ -46,7 +61,7 @@ public class MgKirjasto extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbManga = new javax.swing.JTable();
         comboManga = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,10 +75,25 @@ public class MgKirjasto extends javax.swing.JFrame {
         jLabel4.setText("Kieli:");
 
         btMgLisaa.setText("Lisää");
+        btMgLisaa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMgLisaaActionPerformed(evt);
+            }
+        });
 
         btMgPaivita.setText("Päivitä");
+        btMgPaivita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMgPaivitaActionPerformed(evt);
+            }
+        });
 
         btMgPoista.setText("Poista");
+        btMgPoista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMgPoistaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -121,18 +151,31 @@ public class MgKirjasto extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Kirjasto", jPanel3);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbManga.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nimi", "Tekijä", "Kustantaja", "Kieli"
+                "ID", "Nimi", "Tekijä", "Kustantaja", "Kieli"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbManga.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMangaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbManga);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -152,8 +195,6 @@ public class MgKirjasto extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Manga", jPanel4);
-
-        comboManga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -231,6 +272,68 @@ public class MgKirjasto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btMgLisaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgLisaaActionPerformed
+        System.out.println("Alkaa21");
+        try {
+            
+           
+            //Lisätään tiedot tietokantaan
+            db.putData("INSERT INTO MANGA(NIMI, TEKIJA, KUSTANTAJA, KIELI) "
+                    + "values('" + txtMgNimi.getText() + "','" + txtMgTekija.getText() + "','" + txtMgKustantaja.getText()
+                    + "','" + txtMgKieli.getText() + "')"); 
+
+            System.out.println("Alkaa22");
+            clear();
+            tableload1(tbManga);
+            comboload(comboManga);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Alkaa22");
+    }//GEN-LAST:event_btMgLisaaActionPerformed
+
+    private void tbMangaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMangaMouseClicked
+        //Klikkaamalla taulukkossa jotakin tietoa ne päivittyvät tekstikenttiin
+        //Valitun tiedon nimi (paikka 0) lisätään Mangan nimi:-tekstikenttään
+        txtMgNimi.setText(String.valueOf(tbManga.getValueAt(tbManga.getSelectedRow(), 1)));
+        //Valitun tiedon tekijä (paikka 1) lisätään tekijä:-tekstikenttään
+        txtMgTekija.setText(String.valueOf(tbManga.getValueAt(tbManga.getSelectedRow(), 2)));
+        //Valitun tiedon kustantaja (paikka 2) lisätään kustantaja:-tekstikenttään
+        txtMgKustantaja.setText(String.valueOf(tbManga.getValueAt(tbManga.getSelectedRow(), 3)));
+        //Valitun tiedon kieli (paikka 3) lisätään kieli:-tekstikenttään
+        txtMgKieli.setText(String.valueOf(tbManga.getValueAt(tbManga.getSelectedRow(), 4)));
+
+        comboManga.removeAllItems();
+        comboManga.addItem(String.valueOf(tbManga.getValueAt(tbManga.getSelectedRow(), 1)));
+
+
+    }//GEN-LAST:event_tbMangaMouseClicked
+
+    private void btMgPaivitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgPaivitaActionPerformed
+        try {
+             
+             
+            //Päivitetään viimeisimmät muutokset tietokantaan
+            db.putData("update MANGA set NIMI='" + txtMgNimi.getText() + "',TEKIJA='" + txtMgTekija.getText() +"',KUSTANTAJA='" + txtMgKustantaja.getText() +
+                    "',KIELI='" + txtMgKieli.getText());
+            
+            clear();
+            //Päivitetään taulukko, jotta uusimmat muutokset näkyvät
+            tableload1(tbManga);
+            comboload(comboManga);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btMgPaivitaActionPerformed
+
+    private void btMgPoistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgPoistaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btMgPoistaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -261,7 +364,13 @@ public class MgKirjasto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MgKirjasto().setVisible(true);
+                try {
+                    new MgKirjasto().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -283,10 +392,48 @@ public class MgKirjasto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbManga;
     private javax.swing.JTextField txtMgKieli;
     private javax.swing.JTextField txtMgKustantaja;
     private javax.swing.JTextField txtMgNimi;
     private javax.swing.JTextField txtMgTekija;
     // End of variables declaration//GEN-END:variables
+
+    private void clear() {
+        //Tyhjennetään teksti kentät
+        txtMgNimi.setText(null);
+        txtMgTekija.setText(null);
+        txtMgKustantaja.setText(null);
+        txtMgKieli.setText(null);
+    }
+
+    private void tableload1(JTable jt) throws ClassNotFoundException, SQLException {
+        DefaultTableModel dt = (DefaultTableModel) jt.getModel();
+        //Asetetaan rivit aloittamaan 0
+        dt.setRowCount(0);
+        //Haetaan tiedot tietokannasta ja lisätään ne taulukkoon
+        ResultSet rset = db.getData("SELECT * FROM MANGA");
+
+        while (rset.next()) {
+            Vector v = new Vector();
+            v.add(rset.getString(1));
+            v.add(rset.getString(2));
+            v.add(rset.getString(3));
+            v.add(rset.getString(4));
+            v.add(rset.getString(5));
+
+            dt.addRow(v);
+        }
+    }
+
+    private void comboload(JComboBox jl) throws ClassNotFoundException, SQLException {
+        comboManga.removeAllItems();
+        //Haetaan tiedot tietokannasta ja lisätään ne valintaComboon. 
+        ResultSet rset = db.getData("SELECT * FROM MANGA");
+        while (rset.next()) {
+            String pat = rset.getString("NIMI");
+            comboManga.addItem(pat);
+        }
+
+    }
 }

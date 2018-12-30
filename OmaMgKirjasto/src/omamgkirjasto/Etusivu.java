@@ -5,6 +5,10 @@
  */
 package omamgkirjasto;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author lentt
@@ -59,8 +63,14 @@ public class Etusivu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btMangaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMangaActionPerformed
-        // TODO add your handling code here:
-        new MgKirjasto().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new MgKirjasto().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Etusivu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Etusivu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_btMangaActionPerformed
 
