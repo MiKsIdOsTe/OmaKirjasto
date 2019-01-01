@@ -581,24 +581,19 @@ public class MgKirjasto extends javax.swing.JFrame {
 
     private void comboMangaPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboMangaPopupMenuWillBecomeInvisible
         try {
-            
+
             String valinta = (String) comboManga.getSelectedItem();
             String[] nimet = valinta.split(" ");
             int mangaID = Integer.parseInt(nimet[0]);
-            //ResultSet rset = db.getData("SELECT * FROM MANGA WHERE KIELI ='" + nimet[2] + "' AND NIMI = '" + nimet[1] + "'");
-                ResultSet rset = db.getData("SELECT * FROM MANGA WHERE ID ="+mangaID);
-            while (rset.next()) {
-                String id = rset.getString("ID");
-                String nimi = rset.getString("NIMI");
-                String tekija = rset.getString("TEKIJA");
-                String kustantaja = rset.getString("KUSTANTAJA");
-                String kieli = rset.getString("KIELI");
 
-               txtMgID.setText(id) ;
-                txtMgNimi.setText(nimi);
-                txtMgTekija.setText(tekija);
-                txtMgKustantaja.setText(kustantaja);
-                txtMgKieli.setText(kieli);
+            ResultSet rset = db.getData("SELECT * FROM MANGA WHERE ID =" + mangaID);
+            while (rset.next()) {
+
+                txtMgID.setText(rset.getString("ID"));
+                txtMgNimi.setText(rset.getString("NIMI"));
+                txtMgTekija.setText(rset.getString("TEKIJA"));
+                txtMgKustantaja.setText(rset.getString("KUSTANTAJA"));
+                txtMgKieli.setText(rset.getString("KIELI"));
             }
 
         } catch (ClassNotFoundException ex) {
@@ -611,25 +606,21 @@ public class MgKirjasto extends javax.swing.JFrame {
     private void btKjsLisaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsLisaaActionPerformed
         System.out.println("Alkaa211");
         try {
-            Connection con = (Connection) db;
-            Statement statement1 = con.createStatement();
-            Statement statement2 = con.createStatement();
-            String valittuManga = (String) comboManga.getSelectedItem();
-            String[] MangaTiedot = valittuManga.split(" ");
-            int mangaID = Integer.parseInt(MangaTiedot[0]);
 
-            
-           String sql1 ="SELECT * FROM MANGA WHERE ID = '" + mangaID;
-           ResultSet rset1 = statement1.executeQuery(sql1);
-           // ResultSet rset2 = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA  ON MGKIRJASTO.ID_MANGA = MANGA.ID");
+            String valinta = (String) comboManga.getSelectedItem();
+            String[] nimet = valinta.split(" ");
+            int mangaId = Integer.parseInt(nimet[0]);
+
+            ResultSet rset = db.getData("SELECT * FROM MANGA WHERE ID = " + mangaId);
+
+            // ResultSet rset2 = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA  ON MGKIRJASTO.ID_MANGA = MANGA.ID");
             //Lisätään tiedot tietokantaan
             System.out.println("Välitarkistus");
-            while (rset1.next()) {
-               // while (rset2.next()) {
-                    String sql2 ="INSERT INTO MGKIRJASTO(ID_MANGA,NRO)"
-                            + "values('" + rset1.getInt("ID") + "','" + txtKjsNro.getText() + "')";
-                    statement2.executeUpdate(sql2);
-                }
+            while (rset.next()) {
+                // while (rset2.next()) {
+                db.putData("INSERT INTO MGKIRJASTO(ID_MANGA,NRO) VALUES('" + rset.getInt("ID") + "','" + txtKjsNro.getText() + "')");
+
+            }
             //}
             System.out.println("Alkaa222");
             clear();
@@ -651,11 +642,69 @@ public class MgKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_btKjsLisaaActionPerformed
 
     private void btKjsPaivitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsPaivitaActionPerformed
-        // TODO add your handling code here:
+        try {
+            //Luodaan statement (kysely)
+            System.out.println("Päivitä1");
+
+            String valinta = (String) comboManga.getSelectedItem();
+            String[] nimet = valinta.split(" ");
+            int mangaId = Integer.parseInt(nimet[0]);
+
+            String kjsValinta = (String) comboKirjasto.getSelectedItem();
+            String[] kjsNimet = kjsValinta.split(" ");
+            int kirjastoId = Integer.parseInt(kjsNimet[0]);
+
+            String nro = txtKjsNro.getText();
+            System.out.println("Välitarkistus");
+
+            db.putData("UPDATE MGKIRJASTO SET ID_MANGA  ='" + mangaId + "', NRO = '" + nro + "'  WHERE KIRJASTOID =" + kirjastoId);
+
+            System.out.println("Päivitä5");
+            clear();
+            System.out.println("Päivitä6");
+            //Päivitetään taulukko, jotta uusimmat muutokset näkyvät
+            tableload1(tbManga);
+            System.out.println("Päivitä7");
+            comboload(comboManga);
+            System.out.println("Päivitä8");
+            idloadManga(txtMgID);
+
+            tableload2(tbKirjasto);
+            comboload2(comboKirjasto);
+            idloadKirjasto(txtKjsID);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+        System.out.println("Päivitä9");
     }//GEN-LAST:event_btKjsPaivitaActionPerformed
 
     private void btKjsPoistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsPoistaActionPerformed
-        // TODO add your handling code here:
+        try {
+            String valinta = (String) comboKirjasto.getSelectedItem();
+            String[] nimet = valinta.split(" ");
+            int kirjastoId = Integer.parseInt(nimet[0]);
+
+            db.putData("DELETE FROM MGKIRJASTO WHERE KIRJASTOID = " + kirjastoId);
+            clear();
+            System.out.println("Poista6");
+            //Päivitetään taulukko, jotta uusimmat muutokset näkyvät
+            tableload1(tbManga);
+            System.out.println("Poista7");
+            comboload(comboManga);
+            System.out.println("Poista8");
+            idloadManga(txtMgID);
+            tableload2(tbKirjasto);
+            comboload2(comboKirjasto);
+            idloadKirjasto(txtKjsID);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btKjsPoistaActionPerformed
 
     private void tbKirjastoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKirjastoMouseClicked
@@ -835,7 +884,8 @@ public class MgKirjasto extends javax.swing.JFrame {
         //Asetetaan rivit aloittamaan 0
         dt2.setRowCount(0);
         //Haetaan tiedot tietokannasta ja lisätään ne taulukkoon
-        ResultSet rset = db.getData("SELECT MGKIRJASTO.KIRJASTOID, MANGA.NIMI, MANGA.TEKIJA, MANGA.KUSTANTAJA, MANGA.KIELI, MGKIRJASTO.NRO FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID");
+        ResultSet rset = db.getData("SELECT MGKIRJASTO.KIRJASTOID, MANGA.NIMI, MANGA.TEKIJA, MANGA.KUSTANTAJA, MANGA.KIELI, MGKIRJASTO.NRO "
+                + "FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID");
 
         while (rset.next()) {
             Vector v = new Vector();
