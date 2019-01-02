@@ -39,6 +39,7 @@ public class MgKirjasto extends javax.swing.JFrame {
         tableload2(tbKirjasto);
         comboload2(comboKirjasto);
         idloadKirjasto(txtKjsID);
+       
 
     }
 
@@ -76,6 +77,7 @@ public class MgKirjasto extends javax.swing.JFrame {
         btMgLisaa = new javax.swing.JButton();
         btMgPaivita = new javax.swing.JButton();
         btMgPoista = new javax.swing.JButton();
+        btTyhjenna = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         comboManga = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -230,6 +232,13 @@ public class MgKirjasto extends javax.swing.JFrame {
             }
         });
 
+        btTyhjenna.setText("Tyhjennä");
+        btTyhjenna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTyhjennaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -238,8 +247,11 @@ public class MgKirjasto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btMgPoista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btMgPaivita, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(btMgLisaa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btMgPaivita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btMgLisaa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btTyhjenna)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -251,6 +263,8 @@ public class MgKirjasto extends javax.swing.JFrame {
                 .addComponent(btMgPaivita)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btMgPoista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btTyhjenna)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -282,7 +296,7 @@ public class MgKirjasto extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGap(50, 50, 50)
                             .addComponent(txtMgTekija, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -291,7 +305,6 @@ public class MgKirjasto extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -311,8 +324,10 @@ public class MgKirjasto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(txtMgKieli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                            .addComponent(txtMgKieli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         comboManga.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
@@ -599,7 +614,7 @@ public class MgKirjasto extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Haku", jPanel9);
@@ -689,6 +704,7 @@ public class MgKirjasto extends javax.swing.JFrame {
             tableload2(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
+            jTabbedPane1.setSelectedIndex(1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
@@ -760,6 +776,7 @@ public class MgKirjasto extends javax.swing.JFrame {
             tableload2(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
+            jTabbedPane1.setSelectedIndex(1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
@@ -787,6 +804,7 @@ public class MgKirjasto extends javax.swing.JFrame {
             tableload2(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
+            jTabbedPane1.setSelectedIndex(1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -818,7 +836,7 @@ public class MgKirjasto extends javax.swing.JFrame {
                 txtMgKustantaja.setText(rset.getString("KUSTANTAJA"));
                 txtMgKieli.setText(rset.getString("KIELI"));
             }
-
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -856,6 +874,8 @@ public class MgKirjasto extends javax.swing.JFrame {
             tableload2(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
+            
+            jTabbedPane1.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
@@ -894,6 +914,8 @@ public class MgKirjasto extends javax.swing.JFrame {
             tableload2(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
+            
+            jTabbedPane1.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
@@ -920,6 +942,8 @@ public class MgKirjasto extends javax.swing.JFrame {
             tableload2(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
+            
+            jTabbedPane1.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -975,6 +999,7 @@ public class MgKirjasto extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             tableloadMgHaku(tbManga);
+            jTabbedPane1.setSelectedIndex(1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -984,9 +1009,11 @@ public class MgKirjasto extends javax.swing.JFrame {
 
     private void btMgTyhjennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgTyhjennaActionPerformed
         // TODO add your handling code here:
-        txtMgHaku.setText(null);
+        
         try {
+            txtMgHaku.setText(null);
             tableload1(tbManga);
+            jTabbedPane1.setSelectedIndex(1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -998,6 +1025,7 @@ public class MgKirjasto extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             tableloadKjsHaku(tbKirjasto);
+            jTabbedPane1.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -1007,15 +1035,38 @@ public class MgKirjasto extends javax.swing.JFrame {
 
     private void btKjsTyhjennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsTyhjennaActionPerformed
         // TODO add your handling code here:
-        txtKjsHaku.setText(null);
+        
         try {
+            txtKjsHaku.setText(null);
             tableload2(tbKirjasto);
+            jTabbedPane1.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btKjsTyhjennaActionPerformed
+
+    private void btTyhjennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTyhjennaActionPerformed
+       
+        try {
+             clear();
+            tableload1(tbManga);
+            comboload(comboManga);
+            idloadManga(txtMgID);
+
+            tableload2(tbKirjasto);
+            comboload2(comboKirjasto);
+            idloadKirjasto(txtKjsID);
+            
+            jTabbedPane1.setSelectedIndex(0);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }//GEN-LAST:event_btTyhjennaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1069,6 +1120,7 @@ public class MgKirjasto extends javax.swing.JFrame {
     private javax.swing.JButton btMgPaivita;
     private javax.swing.JButton btMgPoista;
     private javax.swing.JButton btMgTyhjenna;
+    private javax.swing.JButton btTyhjenna;
     private javax.swing.JComboBox<String> comboKirjasto;
     private javax.swing.JComboBox<String> comboKjsHaku;
     private javax.swing.JComboBox<String> comboManga;

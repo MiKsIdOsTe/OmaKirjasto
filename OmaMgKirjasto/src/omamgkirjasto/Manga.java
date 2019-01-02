@@ -10,7 +10,7 @@ package omamgkirjasto;
  * @author lentt
  */
 public class Manga {
-   private String nimi;
+ /*  private String nimi;
     private String tekija;
     private String kustantaja;
     private String kieli; 
@@ -52,7 +52,7 @@ public class Manga {
 
     public void setKieli(String kieli) {
         this.kieli = kieli;
-    }
+    }*/
      
     
 }
