@@ -138,12 +138,12 @@
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="6" rowCount="0">
-                            <Column editable="true" title="ID" type="java.lang.Object"/>
-                            <Column editable="true" title="Nimi" type="java.lang.Object"/>
-                            <Column editable="true" title="Tekij&#xe4;" type="java.lang.Object"/>
-                            <Column editable="true" title="Kustantaja" type="java.lang.Object"/>
-                            <Column editable="true" title="Kieli" type="java.lang.Object"/>
-                            <Column editable="true" title="Nro" type="java.lang.Object"/>
+                            <Column editable="false" title="ID" type="java.lang.Object"/>
+                            <Column editable="false" title="Nimi" type="java.lang.Object"/>
+                            <Column editable="false" title="Tekij&#xe4;" type="java.lang.Object"/>
+                            <Column editable="false" title="Kustantaja" type="java.lang.Object"/>
+                            <Column editable="false" title="Kieli" type="java.lang.Object"/>
+                            <Column editable="false" title="Nro" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -368,19 +368,20 @@
                                   </Group>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Component id="txtMgID" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                          <Component id="txtMgNimi" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                           <Component id="txtMgTekija" min="-2" pref="184" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtMgID" min="-2" pref="35" max="-2" attributes="0"/>
+                                              <Component id="txtMgNimi" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
@@ -456,6 +457,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtMgID">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtMgNimi">
                     </Component>
@@ -552,7 +556,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="txtKjsID" min="-2" pref="192" max="-2" attributes="0"/>
+                                          <Component id="txtKjsID" min="-2" pref="35" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -616,6 +620,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtKjsID">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel7">
                       <Properties>
@@ -630,6 +637,9 @@
                           <StringArray count="0"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="comboKirjastoPopupMenuWillBecomeInvisible"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
