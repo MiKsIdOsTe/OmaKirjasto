@@ -88,6 +88,22 @@ public class MgKirjasto extends javax.swing.JFrame {
         btKjsPaivita = new javax.swing.JButton();
         btKjsPoista = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        comboMgHaku = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        txtMgHaku = new javax.swing.JTextField();
+        btMgHae = new javax.swing.JButton();
+        btMgTyhjenna = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        comboKjsHaku = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        txtKjsHaku = new javax.swing.JTextField();
+        btKjsHae = new javax.swing.JButton();
+        btKjsTyhjenna = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -434,20 +450,156 @@ public class MgKirjasto extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Valinnat", jPanel8);
+
+        jLabel9.setText("Manga haku:");
+
+        jLabel10.setText("Valitse millä haetaan:");
+
+        comboMgHaku.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIMI", "TEKIJA", "KUSTANTAJA", "KIELI" }));
+
+        jLabel11.setText("Kirjoita hakuehto:");
+
+        btMgHae.setText("Hae");
+        btMgHae.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMgHaeActionPerformed(evt);
+            }
+        });
+
+        btMgTyhjenna.setText("Tyhjennä");
+        btMgTyhjenna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMgTyhjennaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboMgHaku, 0, 155, Short.MAX_VALUE)
+                            .addComponent(txtMgHaku))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btMgHae, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btMgTyhjenna))))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(comboMgHaku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btMgHae))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtMgHaku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btMgTyhjenna))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel12.setText("Kirjasto haku:");
+
+        jLabel13.setText("Valitse millä haetaan:");
+
+        comboKjsHaku.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIMI", "TEKIJA", "KUSTANTAJA", "KIELI", "NRO" }));
+
+        jLabel14.setText("Kirjoita hakuehto:");
+
+        btKjsHae.setText("Hae");
+        btKjsHae.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btKjsHaeActionPerformed(evt);
+            }
+        });
+
+        btKjsTyhjenna.setText("Tyhjennä");
+        btKjsTyhjenna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btKjsTyhjennaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboKjsHaku, 0, 157, Short.MAX_VALUE)
+                            .addComponent(txtKjsHaku))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btKjsHae, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btKjsTyhjenna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(comboKjsHaku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btKjsHae))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel13)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtKjsHaku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btKjsTyhjenna))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 523, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 471, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Haku", jPanel9);
@@ -625,7 +777,7 @@ public class MgKirjasto extends javax.swing.JFrame {
             int mangaId = Integer.parseInt(nimet[0]);
             db.putData("DELETE FROM MANGA WHERE ID = " + mangaId);
             db.putData("DELETE FROM MGKIRJASTO WHERE ID_MANGA = " + mangaId);
-            
+
             //Päivitetään taulukko, jotta uusimmat muutokset näkyvät
             clear();
             tableload1(tbManga);
@@ -683,9 +835,8 @@ public class MgKirjasto extends javax.swing.JFrame {
             int mangaId = Integer.parseInt(nimet[0]);
             System.out.println(mangaId);
 
-
             String sql = "SELECT * FROM MANGA WHERE ID = " + mangaId;
-             ResultSet rset = db.getData(sql);
+            ResultSet rset = db.getData(sql);
             // ResultSet rset2 = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA  ON MGKIRJASTO.ID_MANGA = MANGA.ID");
             //Lisätään tiedot tietokantaan
             System.out.println("Välitarkistus");
@@ -760,7 +911,7 @@ public class MgKirjasto extends javax.swing.JFrame {
             int kirjastoId = Integer.parseInt(nimet[0]);
 
             db.putData("DELETE FROM MGKIRJASTO WHERE KIRJASTOID = " + kirjastoId);
-            
+
             clear();
             tableload1(tbManga);
             comboload(comboManga);
@@ -820,6 +971,52 @@ public class MgKirjasto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tbKirjastoMouseClicked
 
+    private void btMgHaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgHaeActionPerformed
+        try {
+            // TODO add your handling code here:
+            tableloadMgHaku(tbManga);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btMgHaeActionPerformed
+
+    private void btMgTyhjennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgTyhjennaActionPerformed
+        // TODO add your handling code here:
+        txtMgHaku.setText(null);
+        try {
+            tableload1(tbManga);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btMgTyhjennaActionPerformed
+
+    private void btKjsHaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsHaeActionPerformed
+        try {
+            // TODO add your handling code here:
+            tableloadKjsHaku(tbKirjasto);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btKjsHaeActionPerformed
+
+    private void btKjsTyhjennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsTyhjennaActionPerformed
+        // TODO add your handling code here:
+        txtKjsHaku.setText(null);
+        try {
+            tableload2(tbKirjasto);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btKjsTyhjennaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -862,15 +1059,26 @@ public class MgKirjasto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btKjsHae;
     private javax.swing.JButton btKjsLisaa;
     private javax.swing.JButton btKjsPaivita;
     private javax.swing.JButton btKjsPoista;
+    private javax.swing.JButton btKjsTyhjenna;
+    private javax.swing.JButton btMgHae;
     private javax.swing.JButton btMgLisaa;
     private javax.swing.JButton btMgPaivita;
     private javax.swing.JButton btMgPoista;
+    private javax.swing.JButton btMgTyhjenna;
     private javax.swing.JComboBox<String> comboKirjasto;
+    private javax.swing.JComboBox<String> comboKjsHaku;
     private javax.swing.JComboBox<String> comboManga;
+    private javax.swing.JComboBox<String> comboMgHaku;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -878,8 +1086,11 @@ public class MgKirjasto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -894,8 +1105,10 @@ public class MgKirjasto extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable tbKirjasto;
     private javax.swing.JTable tbManga;
+    private javax.swing.JTextField txtKjsHaku;
     private javax.swing.JTextField txtKjsID;
     private javax.swing.JTextField txtKjsNro;
+    private javax.swing.JTextField txtMgHaku;
     private javax.swing.JTextField txtMgID;
     private javax.swing.JTextField txtMgKieli;
     private javax.swing.JTextField txtMgKustantaja;
@@ -952,6 +1165,28 @@ public class MgKirjasto extends javax.swing.JFrame {
         }
     }
 
+    private void tableloadMgHaku(JTable jtm) throws ClassNotFoundException, SQLException {
+        DefaultTableModel dt = (DefaultTableModel) jtm.getModel();
+        //Asetetaan rivit aloittamaan 0
+        dt.setRowCount(0);
+
+        String valittu = (String) comboMgHaku.getSelectedItem();
+        String hakuehto = txtMgHaku.getText();
+
+        ResultSet rset = db.getData("SELECT * FROM MANGA WHERE " + valittu + "='" + hakuehto + "'");
+
+        while (rset.next()) {
+            Vector v = new Vector();
+            v.add(rset.getString(1));
+            v.add(rset.getString(2));
+            v.add(rset.getString(3));
+            v.add(rset.getString(4));
+            v.add(rset.getString(5));
+
+            dt.addRow(v);
+        }
+    }
+
     //MGKIRJASTO
     private void tableload2(JTable jt2) throws ClassNotFoundException, SQLException {
         DefaultTableModel dt2 = (DefaultTableModel) jt2.getModel();
@@ -991,6 +1226,29 @@ public class MgKirjasto extends javax.swing.JFrame {
             int i = rset.getInt(1);
             i = i + 1;
             jText2.setText(String.valueOf(i));
+        }
+    }
+    private void tableloadKjsHaku(JTable jtk) throws ClassNotFoundException, SQLException {
+        DefaultTableModel dt = (DefaultTableModel) jtk.getModel();
+        //Asetetaan rivit aloittamaan 0
+        dt.setRowCount(0);
+
+        String valittu = (String) comboKjsHaku.getSelectedItem();
+        String hakuehto = txtKjsHaku.getText();
+
+        ResultSet rset = db.getData("SELECT MGKIRJASTO.KIRJASTOID, MANGA.NIMI, MANGA.TEKIJA, MANGA.KUSTANTAJA, MANGA.KIELI, MGKIRJASTO.NRO "
+                + "FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID WHERE " + valittu + "='" + hakuehto + "'");
+
+        while (rset.next()) {
+            Vector v = new Vector();
+            v.add(rset.getString(1));
+            v.add(rset.getString(2));
+            v.add(rset.getString(3));
+            v.add(rset.getString(4));
+            v.add(rset.getString(5));
+            v.add(rset.getString(6));
+
+            dt.addRow(v);
         }
     }
 }
