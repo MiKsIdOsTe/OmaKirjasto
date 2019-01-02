@@ -23,14 +23,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lentt
  */
-public class MgKirjasto extends javax.swing.JFrame {
+public class MangaKirjasto extends javax.swing.JFrame {
 
     luoYhteys db = new luoYhteys();
 
     /**
      * Creates new form MgKirjasto
      */
-    public MgKirjasto() throws ClassNotFoundException, SQLException {
+    public MangaKirjasto() throws ClassNotFoundException, SQLException {
         initComponents();
         tableload1(tbManga);
         comboload(comboManga);
@@ -40,7 +40,7 @@ public class MgKirjasto extends javax.swing.JFrame {
         comboload2(comboKirjasto);
         idloadKirjasto(txtKjsID);
        
-
+        rivinlasku();
     }
 
     /**
@@ -57,9 +57,11 @@ public class MgKirjasto extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbKirjasto = new javax.swing.JTable();
+        lblKjsRivi = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbManga = new javax.swing.JTable();
+        lblMgRivi = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -110,13 +112,13 @@ public class MgKirjasto extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 255, 0));
+
+        jTabbedPane1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
 
         tbKirjasto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nimi", "Tekijä", "Kustantaja", "Kieli", "Nro"
@@ -132,20 +134,28 @@ public class MgKirjasto extends javax.swing.JFrame {
             tbKirjasto.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
+        lblKjsRivi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblKjsRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblKjsRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -153,10 +163,7 @@ public class MgKirjasto extends javax.swing.JFrame {
 
         tbManga.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nimi", "Tekijä", "Kustantaja", "Kieli"
@@ -180,26 +187,34 @@ public class MgKirjasto extends javax.swing.JFrame {
             tbManga.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
+        lblMgRivi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblMgRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMgRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Manga", jPanel4);
+        jTabbedPane1.addTab("Mangat", jPanel4);
 
         jTabbedPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTabbedPane2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
 
         jLabel5.setText("Manga ID:");
 
@@ -296,7 +311,7 @@ public class MgKirjasto extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGap(50, 50, 50)
                             .addComponent(txtMgTekija, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -382,11 +397,9 @@ public class MgKirjasto extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btKjsPaivita, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btKjsPaivita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btKjsLisaa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addComponent(btKjsPoista)))
+                    .addComponent(btKjsPoista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -419,8 +432,8 @@ public class MgKirjasto extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addGap(58, 58, 58)
                             .addComponent(txtKjsNro, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -448,15 +461,12 @@ public class MgKirjasto extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(95, 95, 95))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,9 +636,9 @@ public class MgKirjasto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -672,15 +682,14 @@ public class MgKirjasto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(316, 316, 316)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -705,11 +714,12 @@ public class MgKirjasto extends javax.swing.JFrame {
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
             jTabbedPane1.setSelectedIndex(1);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
         System.out.println("Alkaa23");
@@ -731,7 +741,6 @@ public class MgKirjasto extends javax.swing.JFrame {
         try {
             int valittuID = Integer.parseInt(String.valueOf(tbManga.getValueAt(tbManga.getSelectedRow(), 0)));
             ResultSet rset;
-            //comboManga.removeAllItems();
 
             rset = db.getData("SELECT * FROM MANGA where ID= " + valittuID + "");
 
@@ -740,15 +749,12 @@ public class MgKirjasto extends javax.swing.JFrame {
             }
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-
-        //While silmukka
-
     }//GEN-LAST:event_tbMangaMouseClicked
 
     private void btMgPaivitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgPaivitaActionPerformed
@@ -777,11 +783,12 @@ public class MgKirjasto extends javax.swing.JFrame {
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
             jTabbedPane1.setSelectedIndex(1);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
         System.out.println("Päivitä9");
@@ -805,10 +812,11 @@ public class MgKirjasto extends javax.swing.JFrame {
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
             jTabbedPane1.setSelectedIndex(1);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btMgPoistaActionPerformed
 
@@ -838,9 +846,9 @@ public class MgKirjasto extends javax.swing.JFrame {
             }
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_comboMangaPopupMenuWillBecomeInvisible
 
@@ -876,11 +884,12 @@ public class MgKirjasto extends javax.swing.JFrame {
             idloadKirjasto(txtKjsID);
             
             jTabbedPane1.setSelectedIndex(0);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
         System.out.println("Alkaa233");
@@ -916,11 +925,12 @@ public class MgKirjasto extends javax.swing.JFrame {
             idloadKirjasto(txtKjsID);
             
             jTabbedPane1.setSelectedIndex(0);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
         System.out.println("Päivitä9");
@@ -944,10 +954,11 @@ public class MgKirjasto extends javax.swing.JFrame {
             idloadKirjasto(txtKjsID);
             
             jTabbedPane1.setSelectedIndex(0);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btKjsPoistaActionPerformed
 
@@ -986,10 +997,10 @@ public class MgKirjasto extends javax.swing.JFrame {
             }
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
 
@@ -1000,10 +1011,11 @@ public class MgKirjasto extends javax.swing.JFrame {
             // TODO add your handling code here:
             tableloadMgHaku(tbManga);
             jTabbedPane1.setSelectedIndex(1);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btMgHaeActionPerformed
 
@@ -1014,10 +1026,11 @@ public class MgKirjasto extends javax.swing.JFrame {
             txtMgHaku.setText(null);
             tableload1(tbManga);
             jTabbedPane1.setSelectedIndex(1);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btMgTyhjennaActionPerformed
 
@@ -1026,10 +1039,11 @@ public class MgKirjasto extends javax.swing.JFrame {
             // TODO add your handling code here:
             tableloadKjsHaku(tbKirjasto);
             jTabbedPane1.setSelectedIndex(0);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btKjsHaeActionPerformed
 
@@ -1040,10 +1054,11 @@ public class MgKirjasto extends javax.swing.JFrame {
             txtKjsHaku.setText(null);
             tableload2(tbKirjasto);
             jTabbedPane1.setSelectedIndex(0);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btKjsTyhjennaActionPerformed
 
@@ -1060,10 +1075,11 @@ public class MgKirjasto extends javax.swing.JFrame {
             idloadKirjasto(txtKjsID);
             
             jTabbedPane1.setSelectedIndex(0);
+            rivinlasku();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         }
             
     }//GEN-LAST:event_btTyhjennaActionPerformed
@@ -1085,25 +1101,26 @@ public class MgKirjasto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MgKirjasto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MangaKirjasto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MgKirjasto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MangaKirjasto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MgKirjasto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MangaKirjasto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MgKirjasto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MangaKirjasto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new MgKirjasto().setVisible(true);
+                    new MangaKirjasto().setVisible(true);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
-                    Logger.getLogger(MgKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -1155,6 +1172,8 @@ public class MgKirjasto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JLabel lblKjsRivi;
+    private javax.swing.JLabel lblMgRivi;
     private javax.swing.JTable tbKirjasto;
     private javax.swing.JTable tbManga;
     private javax.swing.JTextField txtKjsHaku;
@@ -1175,6 +1194,13 @@ public class MgKirjasto extends javax.swing.JFrame {
         txtMgKustantaja.setText(null);
         txtMgKieli.setText(null);
         txtKjsNro.setText(null);
+    }
+    
+    private void rivinlasku(){
+       int riviKjs = tbKirjasto.getRowCount();
+       lblKjsRivi.setText(""+riviKjs+" ");
+       int riviMg = tbManga.getRowCount();
+       lblMgRivi.setText(""+riviMg+" ");
     }
 
     //MANGA

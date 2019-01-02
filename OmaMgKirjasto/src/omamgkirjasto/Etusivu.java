@@ -32,6 +32,7 @@ public class Etusivu extends javax.swing.JFrame {
     private void initComponents() {
 
         btManga = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,6 +43,8 @@ public class Etusivu extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Anime");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -49,13 +52,17 @@ public class Etusivu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(btManga)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(92, 92, 92)
-                .addComponent(btManga)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btManga)
+                    .addComponent(jButton1))
                 .addContainerGap(183, Short.MAX_VALUE))
         );
 
@@ -65,7 +72,7 @@ public class Etusivu extends javax.swing.JFrame {
     private void btMangaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMangaActionPerformed
         try {
             // TODO add your handling code here:
-            new MgKirjasto().setVisible(true);
+            new MangaKirjasto().setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Etusivu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -111,5 +118,6 @@ public class Etusivu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btManga;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
