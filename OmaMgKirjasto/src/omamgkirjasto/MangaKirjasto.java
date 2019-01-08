@@ -6,10 +6,10 @@
 package omamgkirjasto;
 
 import java.awt.Component;
-import java.sql.Connection;
+//import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+//import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -928,7 +928,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
             String valinta2 = (String) comboKirjasto.getSelectedItem();
             String[] nimet2 = valinta2.split(" ");
-            int kirjastoId = Integer.parseInt(nimet[0]);
+            int kirjastoId = Integer.parseInt(nimet2[0]);
 
             String nro = txtKjsNro.getText();
             System.out.println(mangaId);
@@ -1305,7 +1305,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
         String valittu = (String) comboMgHaku.getSelectedItem();
         String hakuehto = txtMgHaku.getText();
 
-        ResultSet rset = db.getData("SELECT * FROM MANGA WHERE " + valittu + "='" + hakuehto + "'");
+        ResultSet rset = db.getData("SELECT * FROM MANGA WHERE " + valittu + " LIKE '%" + hakuehto + "%'");
 
         while (rset.next()) {
             Vector v = new Vector();
@@ -1372,7 +1372,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
         String hakuehto = txtKjsHaku.getText();
 
         ResultSet rset = db.getData("SELECT MGKIRJASTO.KIRJASTOID, MANGA.NIMI, MANGA.TEKIJA, MANGA.KUSTANTAJA, MANGA.KIELI, MGKIRJASTO.NRO "
-                + "FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID WHERE " + valittu + "='" + hakuehto + "'");
+                + "FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID WHERE " + valittu + " LIKE '%" + hakuehto + "%'");
 
         while (rset.next()) {
             Vector v = new Vector();
