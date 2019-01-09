@@ -36,11 +36,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
      */
     public MangaKirjasto() throws ClassNotFoundException, SQLException {
         initComponents();
-        tableload1(tbManga);
-        comboload(comboManga);
+        tableloadMg(tbManga);
+        comboloadMg(comboManga);
         idloadManga(txtMgID);
 
-        tableload2(tbKirjasto);
+        tableloadKjs(tbKirjasto);
         comboload2(comboKirjasto);
         idloadKirjasto(txtKjsID);
 
@@ -768,11 +768,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
             System.out.println("Alkaa22");
             clear();
-            tableload1(tbManga);
-            comboload(comboManga);
+            tableloadMg(tbManga);
+            comboloadMg(comboManga);
             idloadManga(txtMgID);
 
-            tableload2(tbKirjasto);
+            tableloadKjs(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
             jTabbedPane1.setSelectedIndex(1);
@@ -837,11 +837,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
             System.out.println("Päivitä5");
             clear();
-            tableload1(tbManga);
-            comboload(comboManga);
+            tableloadMg(tbManga);
+            comboloadMg(comboManga);
             idloadManga(txtMgID);
 
-            tableload2(tbKirjasto);
+            tableloadKjs(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
             jTabbedPane1.setSelectedIndex(1);
@@ -866,11 +866,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
             //Päivitetään taulukko, jotta uusimmat muutokset näkyvät
             clear();
-            tableload1(tbManga);
-            comboload(comboManga);
+            tableloadMg(tbManga);
+            comboloadMg(comboManga);
             idloadManga(txtMgID);
 
-            tableload2(tbKirjasto);
+            tableloadKjs(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
             jTabbedPane1.setSelectedIndex(1);
@@ -937,11 +937,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
             //}
             System.out.println("Alkaa222");
             clear();
-            tableload1(tbManga);
-            comboload(comboManga);
+            tableloadMg(tbManga);
+            comboloadMg(comboManga);
             idloadManga(txtMgID);
 
-            tableload2(tbKirjasto);
+            tableloadKjs(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
 
@@ -978,11 +978,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
             System.out.println("Päivitä5");
             clear();
-            tableload1(tbManga);
-            comboload(comboManga);
+            tableloadMg(tbManga);
+            comboloadMg(comboManga);
             idloadManga(txtMgID);
 
-            tableload2(tbKirjasto);
+            tableloadKjs(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
 
@@ -1007,11 +1007,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
             db.putData("DELETE FROM MGKIRJASTO WHERE KIRJASTOID = " + kirjastoId);
 
             clear();
-            tableload1(tbManga);
-            comboload(comboManga);
+            tableloadMg(tbManga);
+            comboloadMg(comboManga);
             idloadManga(txtMgID);
 
-            tableload2(tbKirjasto);
+            tableloadKjs(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
 
@@ -1086,7 +1086,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
         try {
             txtMgHaku.setText(null);
-            tableload1(tbManga);
+            tableloadMg(tbManga);
             jTabbedPane1.setSelectedIndex(1);
             rivinlasku();
         } catch (ClassNotFoundException ex) {
@@ -1114,7 +1114,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
         try {
             txtKjsHaku.setText(null);
-            tableload2(tbKirjasto);
+            tableloadKjs(tbKirjasto);
             jTabbedPane1.setSelectedIndex(0);
             rivinlasku();
         } catch (ClassNotFoundException ex) {
@@ -1128,11 +1128,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
         try {
             clear();
-            tableload1(tbManga);
-            comboload(comboManga);
+            tableloadMg(tbManga);
+            comboloadMg(comboManga);
             idloadManga(txtMgID);
 
-            tableload2(tbKirjasto);
+            tableloadKjs(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
 
@@ -1334,7 +1334,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }
 
     //MANGA
-    private void tableload1(JTable jt) throws ClassNotFoundException, SQLException {
+    private void tableloadMg(JTable jt) throws ClassNotFoundException, SQLException {
         DefaultTableModel dt = (DefaultTableModel) jt.getModel();
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
@@ -1357,7 +1357,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
         }
     }
 
-    private void comboload(JComboBox jl) throws ClassNotFoundException, SQLException {
+    private void comboloadMg(JComboBox jl) throws ClassNotFoundException, SQLException {
         comboManga.removeAllItems();
         //Haetaan tiedot tietokannasta ja lisätään ne valintaComboon. 
         ResultSet rset = db.getData("SELECT * FROM MANGA");
@@ -1404,7 +1404,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }
 
     //MGKIRJASTO
-    private void tableload2(JTable jt2) throws ClassNotFoundException, SQLException {
+    private void tableloadKjs(JTable jt2) throws ClassNotFoundException, SQLException {
         DefaultTableModel dt = (DefaultTableModel) jt2.getModel();
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
