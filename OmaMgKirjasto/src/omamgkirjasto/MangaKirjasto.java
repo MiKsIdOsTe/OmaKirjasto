@@ -6,9 +6,11 @@
 package omamgkirjasto;
 
 import java.awt.Component;
+import java.awt.print.PrinterException;
 //import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 //import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -58,10 +60,12 @@ public class MangaKirjasto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbKirjasto = new javax.swing.JTable();
         lblKjsRivi = new javax.swing.JLabel();
+        btKjsTulosta = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbManga = new javax.swing.JTable();
         lblMgRivi = new javax.swing.JLabel();
+        btMgTulosta = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -144,6 +148,13 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
         lblKjsRivi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
+        btKjsTulosta.setText("Tulosta");
+        btKjsTulosta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btKjsTulostaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -152,7 +163,8 @@ public class MangaKirjasto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btKjsTulosta, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblKjsRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE))
                 .addContainerGap())
@@ -161,9 +173,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblKjsRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblKjsRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btKjsTulosta))
                 .addContainerGap())
         );
 
@@ -197,6 +211,13 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
         lblMgRivi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
+        btMgTulosta.setText("Tulosta");
+        btMgTulosta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMgTulostaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -205,7 +226,9 @@ public class MangaKirjasto extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(btMgTulosta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMgRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -213,9 +236,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMgRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMgRivi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btMgTulosta))
                 .addContainerGap())
         );
 
@@ -1135,6 +1160,34 @@ public class MangaKirjasto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboKirjastoPopupMenuWillBecomeInvisible
 
+    private void btKjsTulostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsTulostaActionPerformed
+         MessageFormat otsikko = new MessageFormat("Manga kirjasto");
+
+        MessageFormat alaOtsikko = new MessageFormat("Sivu{0,number,integer}");
+
+        try {
+            tbKirjasto.print(JTable.PrintMode.FIT_WIDTH, otsikko, alaOtsikko);
+        } catch (PrinterException ex) {
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.format("VIRHE. Ei voitu tulostaa %s%n", ex.getMessage());
+        }
+
+    }//GEN-LAST:event_btKjsTulostaActionPerformed
+
+    private void btMgTulostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgTulostaActionPerformed
+        MessageFormat otsikko = new MessageFormat("Mangat");
+
+        MessageFormat alaOtsikko = new MessageFormat("Sivu{0,number,integer}");
+
+        try {
+            tbManga.print(JTable.PrintMode.FIT_WIDTH, otsikko, alaOtsikko);
+        } catch (PrinterException ex) {
+            Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.format("VIRHE. Ei voitu tulostaa %s%n", ex.getMessage());
+        }
+
+    }//GEN-LAST:event_btMgTulostaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1182,11 +1235,13 @@ public class MangaKirjasto extends javax.swing.JFrame {
     private javax.swing.JButton btKjsLisaa;
     private javax.swing.JButton btKjsPaivita;
     private javax.swing.JButton btKjsPoista;
+    private javax.swing.JButton btKjsTulosta;
     private javax.swing.JButton btKjsTyhjenna;
     private javax.swing.JButton btMgHae;
     private javax.swing.JButton btMgLisaa;
     private javax.swing.JButton btMgPaivita;
     private javax.swing.JButton btMgPoista;
+    private javax.swing.JButton btMgTulosta;
     private javax.swing.JButton btMgTyhjenna;
     private javax.swing.JButton btTyhjenna;
     private javax.swing.JComboBox<String> comboKirjasto;
