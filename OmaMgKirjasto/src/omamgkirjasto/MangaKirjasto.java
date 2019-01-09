@@ -38,8 +38,8 @@ public class MangaKirjasto extends javax.swing.JFrame {
         initComponents();
 
         /**
-         * Tyhjennetään tekstikentät ladataan uudestaan taulukot, valikot ja
-         * id:t-tekstikenttiin. lasketaan raulukkojen rivit uudellen.
+         * Tyhjennetään tekstikentät. ladataan uudestaan taulukot, valikot ja
+         * ID:t-idtekstikenttiin. lasketaan raulukkojen rivit uudellen.
          */
         tableloadMg(tbManga);
         comboloadMg(comboManga);
@@ -765,6 +765,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
     private void btMgLisaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgLisaaActionPerformed
 
         try {
+            //Tarkistetaan ettei tekstikentät ole tyhjiä. 
             if (txtMgNimi.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Anna Nimi!");
 
@@ -779,7 +780,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
             } else {
 
-                //Lisätään tiedot tietokantaan
+                /**
+                 * Kun on tarkistettu että teksti-kentissä on tekstiä niin
+                 * haetaan ne ja tallennetaan tietokantaan. ID on
+                 * automaattisesti generoitu
+                 */
                 db.putData("INSERT INTO MANGA(NIMI,TEKIJA,KUSTANTAJA,KIELI) "
                         + "values('" + txtMgNimi.getText() + "','" + txtMgTekija.getText() + "','" + txtMgKustantaja.getText()
                         + "','" + txtMgKieli.getText() + "')");
@@ -833,7 +838,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
             rset = db.getData("SELECT * FROM MANGA where ID= " + valittuID);
             //Valitaan valikosta taulukon valittu rivi
             while (rset.next()) {
-                comboManga.setSelectedItem(rset.getInt("ID") + " " + rset.getString("NIMI") + " " + rset.getString("KIELI"));
+                comboManga.setSelectedItem(rset.getInt("ID") + " , " + rset.getString("NIMI") + " , " + rset.getString("KIELI"));
             }
             //Tyhjennetään txtKjsNro tekstikenttä
             txtKjsNro.setText(null);
@@ -848,6 +853,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
     private void btMgPaivitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgPaivitaActionPerformed
         try {
+            //Tarkistetaan ettei tekstikentät ole tyhjiä.
             if (txtMgNimi.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Anna Nimi!");
 
@@ -862,8 +868,8 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
             } else {
                 /**
-                 * Haetaan päivitettävän tiedon id comboManga:sta ja muutetaan
-                 * se int-muotoon
+                 * Kun kaikissa kentissä on tietoa niin, haetaan päivitettävän
+                 * tiedon id comboManga:sta ja muutetaan se int-muotoon
                  */
                 String valinta = (String) comboManga.getSelectedItem();
                 String[] nimet = valinta.split(" ");
@@ -947,7 +953,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
     private void comboMangaPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboMangaPopupMenuWillBecomeInvisible
         try {
-
+            /**
+             * Haetaan valittavan tiedon id comboManga:sta ja muutetaan se
+             * int-muotoon. Haetaan tiedot tietokannasta. Lisätään ne
+             * tekstikenttiin
+             */
             String valinta = (String) comboManga.getSelectedItem();
             String[] nimet = valinta.split(" ");
             int mangaID = Integer.parseInt(nimet[0]);
@@ -970,31 +980,33 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_comboMangaPopupMenuWillBecomeInvisible
 
     private void btKjsLisaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsLisaaActionPerformed
-        System.out.println("Alkaa211");
+
         try {
+            //Tarkistetaan ettei Nro tekstikenttä ole tyhjä
             if (txtKjsNro.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Anna Numaro!");
+                JOptionPane.showMessageDialog(null, "Anna Numero!");
 
             } else {
-
+                /**
+                 * Haetaan valittavan tiedon id comboManga:sta ja muutetaan se
+                 * int-muotoon. Haetaan MANGA:n tiedot tietokannasta. Lisätään
+                 * MGKIRJASTO:on mangan id ja Nro haetaan tekstikentästä
+                 */
                 String valinta = (String) comboManga.getSelectedItem();
                 String[] nimet = valinta.split(" ");
                 int mangaId = Integer.parseInt(nimet[0]);
-                System.out.println(mangaId);
 
-                String sql = "SELECT * FROM MANGA WHERE ID = " + mangaId;
-                ResultSet rset = db.getData(sql);
-                // ResultSet rset2 = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA  ON MGKIRJASTO.ID_MANGA = MANGA.ID");
-                //Lisätään tiedot tietokantaan
-                System.out.println("Välitarkistus");
+                ResultSet rset = db.getData("SELECT * FROM MANGA WHERE ID = " + mangaId);
+
                 while (rset.next()) {
-                    System.out.println(rset.getInt("ID"));
-                    // while (rset2.next()) {
                     db.putData("INSERT INTO MGKIRJASTO(ID_MANGA,NRO) VALUES(" + rset.getInt("ID") + ",'" + txtKjsNro.getText() + "')");
-
                 }
-                //}
-                System.out.println("Alkaa222");
+
+                /**
+                 * Tyhjennetään tekstikentät ladataan uudestaan taulukot,
+                 * valikot ja id:t-tekstikenttiin. Asetetaan Manga välilehti
+                 * valituksi lasketaan raulukkojen rivit uudellen.
+                 */
                 clear();
                 tableloadMg(tbManga);
                 comboloadMg(comboManga);
@@ -1014,32 +1026,38 @@ public class MangaKirjasto extends javax.swing.JFrame {
             Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-        System.out.println("Alkaa233");
+
     }//GEN-LAST:event_btKjsLisaaActionPerformed
 
     private void btKjsPaivitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsPaivitaActionPerformed
         try {
-            //Luodaan statement (kysely)
-            System.out.println("Päivitä1");
+            //Tarkistetaan ettei Nro tekstikenttä ole tyhjä
             if (txtKjsNro.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Anna Numaro!");
 
             } else {
+                /**
+                 * Haetaan valittavan tiedon id comboManga:sta ja
+                 * comboKirjasto:sta Muutetaan ne int-muotoon. Päivitetään
+                 * MGKIRJASTO:on mangan id ja Nro, joka haetaan tekstikentästä
+                 */
                 String valinta = (String) comboManga.getSelectedItem();
                 String[] nimet = valinta.split(" ");
                 int mangaId = Integer.parseInt(nimet[0]);
 
-                String valinta2 = (String) comboKirjasto.getSelectedItem();
-                String[] nimet2 = valinta2.split(" ");
-                int kirjastoId = Integer.parseInt(nimet2[0]);
+                String valintaKjs = (String) comboKirjasto.getSelectedItem();
+                String[] nimetKjs = valintaKjs.split(" ");
+                int kirjastoId = Integer.parseInt(nimetKjs[0]);
 
                 String nro = txtKjsNro.getText();
-                System.out.println(mangaId);
-                System.out.println(kirjastoId);
 
                 db.putData("UPDATE MGKIRJASTO SET ID_MANGA  =" + mangaId + ", NRO = '" + nro + "'  WHERE KIRJASTOID =" + kirjastoId);
 
-                System.out.println("Päivitä5");
+                /**
+                 * Tyhjennetään tekstikentät ladataan uudestaan taulukot,
+                 * valikot ja id:t-tekstikenttiin. Asetetaan Manga välilehti
+                 * valituksi lasketaan raulukkojen rivit uudellen.
+                 */
                 clear();
                 tableloadMg(tbManga);
                 comboloadMg(comboManga);
@@ -1059,17 +1077,27 @@ public class MangaKirjasto extends javax.swing.JFrame {
             Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-        System.out.println("Päivitä9");
+
     }//GEN-LAST:event_btKjsPaivitaActionPerformed
 
     private void btKjsPoistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsPoistaActionPerformed
         try {
+            /**
+             * Haetaan poistettavan tiedon id comboKirjasto:sta ja muutetaan se
+             * int-muotoon. Poistetaan tieto MGKIRJASTO:sta KirjastoID:n mukaan
+             */
             String valinta = (String) comboKirjasto.getSelectedItem();
             String[] nimet = valinta.split(" ");
             int kirjastoId = Integer.parseInt(nimet[0]);
 
             db.putData("DELETE FROM MGKIRJASTO WHERE KIRJASTOID = " + kirjastoId);
 
+            /**
+             * Kutsutaan metodeja. Tyhjennetään tekstikentät ladataan uudestaan.
+             * manga ja kirjasto taulukot valikot ja id:t-tekstikenttiin.
+             * lasketaan raulukkojen rivit uudellen. Asetetaan Kirjasto
+             * välilehti päällimmäiseksi
+             */
             clear();
             tableloadMg(tbManga);
             comboloadMg(comboManga);
@@ -1078,9 +1106,9 @@ public class MangaKirjasto extends javax.swing.JFrame {
             tableloadKjs(tbKirjasto);
             comboload2(comboKirjasto);
             idloadKirjasto(txtKjsID);
-
-            jTabbedPane1.setSelectedIndex(0);
             rivinlasku();
+            jTabbedPane1.setSelectedIndex(0);
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -1090,7 +1118,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
     private void tbKirjastoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKirjastoMouseClicked
         //Klikkaamalla taulukkossa jotakin tietoa ne päivittyvät tekstikenttiin
-        //Valitun tiedon nimi (paikka 0) lisätään Mangan nimi:-tekstikenttään
+        //Valitun tiedon id (paikka 0) lisätään KirjastoID:-tekstikenttään
         txtKjsID.setText(String.valueOf(tbKirjasto.getValueAt(tbKirjasto.getSelectedRow(), 0)));
         //Valitun tiedon nimi (paikka 1) lisätään Mangan nimi:-tekstikenttään
         txtMgNimi.setText(String.valueOf(tbKirjasto.getValueAt(tbKirjasto.getSelectedRow(), 1)));
@@ -1100,7 +1128,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
         txtMgKustantaja.setText(String.valueOf(tbKirjasto.getValueAt(tbKirjasto.getSelectedRow(), 3)));
         //Valitun tiedon kieli (paikka 3) lisätään kieli:-tekstikenttään
         txtMgKieli.setText(String.valueOf(tbKirjasto.getValueAt(tbKirjasto.getSelectedRow(), 4)));
-        //Valitun tiedon kieli (paikka 3) lisätään kieli:-tekstikenttään
+        //Valitun tiedon Nro (paikka 3) lisätään Nro:-tekstikenttään
         txtKjsNro.setText(String.valueOf(tbKirjasto.getValueAt(tbKirjasto.getSelectedRow(), 5)));
 
         try {
@@ -1110,7 +1138,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
             ResultSet rset = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID WHERE KIRJASTOID= " + valittuKjsID + "");
             //Lisätään tiedot comboManga-valikkoon
             while (rset.next()) {
-                comboManga.setSelectedItem(rset.getInt("ID_MANGA") + " " + rset.getString("NIMI") + " " + rset.getString("KIELI"));
+                comboManga.setSelectedItem(rset.getInt("ID_MANGA") + " , " + rset.getString("NIMI") + " , " + rset.getString("KIELI"));
                 //Lisätään txtMgID-kenttään Manga ID 
                 txtMgID.setText(rset.getString("ID"));
             }
@@ -1119,7 +1147,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
             ResultSet rset2 = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID WHERE KIRJASTOID= " + valittuKjsID + "");
             //Lisätään tiedot comboKirjasto-valikkoon
             while (rset2.next()) {
-                comboKirjasto.setSelectedItem(rset2.getInt("KIRJASTOID") + " " + rset2.getString("NIMI") + " " + rset2.getString("NRO"));
+                comboKirjasto.setSelectedItem(rset2.getInt("KIRJASTOID") + " , " + rset2.getString("NIMI") + " , " + rset2.getString("NRO"));
             }
 
         } catch (ClassNotFoundException ex) {
@@ -1134,10 +1162,14 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
     private void btMgHaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgHaeActionPerformed
         try {
-            // TODO add your handling code here:
+            /**
+             * Kutsutaan tableloadMgHaku-metodia manga-talukkoon. lasketaan
+             * raulukkojen rivituudellen. Asetetaan manga välilehti
+             * päällimmäiseksi.
+             */
             tableloadMgHaku(tbManga);
-            jTabbedPane1.setSelectedIndex(1);
             rivinlasku();
+            jTabbedPane1.setSelectedIndex(1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -1146,13 +1178,16 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_btMgHaeActionPerformed
 
     private void btMgTyhjennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgTyhjennaActionPerformed
-        // TODO add your handling code here:
-
         try {
+            /**
+             * Tyhjennetän manga haku kenttä. lasketaan raulukkojen
+             * rivituudellen. Kutsutaan tableloadMgHaku-metodia manga-talukkoon.
+             * Asetetaan manga välilehti päällimmäiseksi.
+             */
             txtMgHaku.setText(null);
+            rivinlasku();
             tableloadMg(tbManga);
             jTabbedPane1.setSelectedIndex(1);
-            rivinlasku();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -1162,10 +1197,15 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
     private void btKjsHaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsHaeActionPerformed
         try {
-            // TODO add your handling code here:
+            /**
+             * Kutsutaan tableloadKjsHaku-metodia Kirjasto-talukkoon. lasketaan
+             * raulukkojen rivituudellen. Asetetaan Kirjasto välilehti
+             * päällimmäiseksi.
+             */
             tableloadKjsHaku(tbKirjasto);
-            jTabbedPane1.setSelectedIndex(0);
             rivinlasku();
+            jTabbedPane1.setSelectedIndex(0);
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -1174,13 +1214,16 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_btKjsHaeActionPerformed
 
     private void btKjsTyhjennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsTyhjennaActionPerformed
-        // TODO add your handling code here:
-
         try {
+            /**
+             * Tyhjennetän kirjasto haku kenttä. lasketaan raulukkojen
+             * rivituudellen. Kutsutaan tableloadMgHaku-metodia manga-talukkoon.
+             * Asetetaan manga välilehti päällimmäiseksi.
+             */
             txtKjsHaku.setText(null);
-            tableloadKjs(tbKirjasto);
-            jTabbedPane1.setSelectedIndex(0);
             rivinlasku();
+            jTabbedPane1.setSelectedIndex(0);
+            tableloadKjs(tbKirjasto);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MangaKirjasto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -1189,8 +1232,13 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_btKjsTyhjennaActionPerformed
 
     private void btTyhjennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTyhjennaActionPerformed
-
         try {
+            /**
+             * Kutsutaan metodeja. Tyhjennetään tekstikentät ladataan uudestaan.
+             * manga ja kirjasto taulukot valikot ja id:t-tekstikenttiin.
+             * lasketaan raulukkojen rivit uudellen. Asetetaan Kirjasto
+             * välilehti päällimmäiseksi
+             */
             clear();
             tableloadMg(tbManga);
             comboloadMg(comboManga);
@@ -1211,9 +1259,12 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_btTyhjennaActionPerformed
 
     private void comboKirjastoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboKirjastoPopupMenuWillBecomeInvisible
-        // TODO add your handling code here:
         try {
-
+            /**
+             * Haetaan valittavan tiedon id comboKirjasto:sta ja muutetaan se
+             * int-muotoon. Haetaan tiedot tietokannasta. Lisätään ne
+             * tekstikenttiin
+             */
             String valinta = (String) comboKirjasto.getSelectedItem();
             String[] nimet = valinta.split(" ");
             int kirjastoID = Integer.parseInt(nimet[0]);
@@ -1240,6 +1291,10 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_comboKirjastoPopupMenuWillBecomeInvisible
 
     private void btKjsTulostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKjsTulostaActionPerformed
+        /**
+         * Luodaan Otsikko ja ala otsikko(Sivunumero) ja lisätään ne
+         * tulostettavaan taulukkoon.
+         */
         MessageFormat otsikko = new MessageFormat("Manga kirjasto");
 
         MessageFormat alaOtsikko = new MessageFormat("Sivu{0,number,integer}");
@@ -1254,6 +1309,10 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_btKjsTulostaActionPerformed
 
     private void btMgTulostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMgTulostaActionPerformed
+        /**
+         * Luodaan Otsikko ja ala otsikko(Sivunumero) ja lisätään ne
+         * tulostettavaan taulukkoon.
+         */
         MessageFormat otsikko = new MessageFormat("Mangat");
 
         MessageFormat alaOtsikko = new MessageFormat("Sivu{0,number,integer}");
@@ -1268,8 +1327,9 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }//GEN-LAST:event_btMgTulostaActionPerformed
 
     private void btValikkoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValikkoActionPerformed
-
-        // TODO add your handling code here:
+        /**
+         * Haetaan etusivu näkyville. Piilotetaan Mangakirjasto
+         */
         new Etusivu().setVisible(true);
 
         this.setVisible(false);
@@ -1391,6 +1451,10 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }
 
     private void rivinlasku() {
+        /**
+         * Lasketaan Kirjato-taulukon rivit ja lisätään lblKjsRivi-labeliin.
+         * Lasketaan Manga-taulukon rivit ja lisätään lblMgRivi-labeliin.
+         */
         int riviKjs = tbKirjasto.getRowCount();
         lblKjsRivi.setText("" + riviKjs + " ");
         int riviMg = tbManga.getRowCount();
@@ -1399,10 +1463,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
     //MANGA
     private void tableloadMg(JTable jt) throws ClassNotFoundException, SQLException {
+        //Luodaan taulukko malli
         DefaultTableModel dt = (DefaultTableModel) jt.getModel();
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
-
+        //Luodaan taulukko lajittelija ja asetetaan se manga taulukkoon
         TableRowSorter<TableModel> sorter;
         sorter = new TableRowSorter<TableModel>(dt);
         tbManga.setRowSorter(sorter);
@@ -1422,11 +1487,12 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }
 
     private void comboloadMg(JComboBox jl) throws ClassNotFoundException, SQLException {
+       //Alustetaan comboManga
         comboManga.removeAllItems();
         //Haetaan tiedot tietokannasta ja lisätään ne valintaComboon. 
         ResultSet rset = db.getData("SELECT * FROM MANGA");
         while (rset.next()) {
-            String pat = rset.getInt("ID") + " " + rset.getString("NIMI") + " " + rset.getString("KIELI");
+            String pat = rset.getInt("ID") + " , " + rset.getString("NIMI") + " , " + rset.getString("KIELI");
             comboManga.addItem(pat);
         }
     }
@@ -1442,18 +1508,27 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }
 
     private void tableloadMgHaku(JTable jtm) throws ClassNotFoundException, SQLException {
+        //Luodaan taulukko malli
         DefaultTableModel dt = (DefaultTableModel) jtm.getModel();
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
-
+        //Luodaan taulukko lajittelija ja asetetaan se manga taulukkoon
         TableRowSorter<TableModel> sorter;
         sorter = new TableRowSorter<TableModel>(dt);
         tbManga.setRowSorter(sorter);
+        //Tarkistetaan ettei manga haku-kenttä ole tyhjä
         if (txtMgHaku.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Haku kenttään hakusana!");
+            //Jos haku kenttä on tyhjä niin näytetään viesti
+            JOptionPane.showMessageDialog(null, "Anna haku kenttään hakusana!");
+            //Kutsutaan tableloasMg-metodia manga taulukkoon
             tableloadMg(tbManga);
 
         } else {
+            /**
+             * Haetaan valittavan tiedon id comboManga:sta ja muutetaan se
+             * int-muotoon. Haetaan tiedot tietokannasta. 
+             * Lisätään ne taulukkoon
+             */
             String valittu = (String) comboMgHaku.getSelectedItem();
             String hakuehto = txtMgHaku.getText();
 
@@ -1474,9 +1549,11 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
     //MGKIRJASTO
     private void tableloadKjs(JTable jt2) throws ClassNotFoundException, SQLException {
+        //Luodaan taulukko malli
         DefaultTableModel dt = (DefaultTableModel) jt2.getModel();
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
+        //Luodaan taulukko lajittelija ja asetetaan se kirjasto taulukkoon
         TableRowSorter<TableModel> sorter;
         sorter = new TableRowSorter<TableModel>(dt);
         tbKirjasto.setRowSorter(sorter);
@@ -1499,11 +1576,12 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }
 
     private void comboload2(JComboBox jl2) throws ClassNotFoundException, SQLException {
+        //Alustetaan comboKirjasto
         comboKirjasto.removeAllItems();
         //Haetaan tiedot tietokannasta ja lisätään ne valintaComboon. 
         ResultSet rset = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID");
         while (rset.next()) {
-            String pat = rset.getInt("KIRJASTOID") + " " + rset.getString("NIMI") + " " + rset.getString("NRO");
+            String pat = rset.getInt("KIRJASTOID") + " , " + rset.getString("NIMI") + " , " + rset.getString("NRO");
             comboKirjasto.addItem(pat);
         }
     }
@@ -1519,19 +1597,27 @@ public class MangaKirjasto extends javax.swing.JFrame {
     }
 
     private void tableloadKjsHaku(JTable jtk) throws ClassNotFoundException, SQLException {
+        //Luodaan taulukko malli
         DefaultTableModel dt = (DefaultTableModel) jtk.getModel();
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
-
+        //Luodaan taulukko lajittelija ja asetetaan se kirjasto taulukkoon
         TableRowSorter<TableModel> sorter;
         sorter = new TableRowSorter<TableModel>(dt);
         tbKirjasto.setRowSorter(sorter);
-
+         //Tarkistetaan ettei manga haku-kenttä ole tyhjä
         if (txtKjsHaku.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Haku kenttään hakusana!");
+            //Jos haku kenttä on tyhjä niin näytetään viesti
+            JOptionPane.showMessageDialog(null, "Anna haku kenttään hakusana!");
+            //Kutsutaan tableloasMg-metodia manga taulukkoon
             tableloadKjs(tbKirjasto);
 
         } else {
+            /**
+             * Haetaan valittavan tiedon id comboKirjasto:sta ja muutetaan se
+             * int-muotoon. Haetaan tiedot tietokannasta. 
+             * Lisätään ne taulukkoon
+             */
 
             String valittu = (String) comboKjsHaku.getSelectedItem();
             String hakuehto = txtKjsHaku.getText();
