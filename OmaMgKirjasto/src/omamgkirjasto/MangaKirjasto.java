@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -1315,7 +1317,9 @@ public class MangaKirjasto extends javax.swing.JFrame {
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
 
-        tbManga.setAutoCreateRowSorter(true);
+      TableRowSorter<TableModel> sorter;
+        sorter = new TableRowSorter<TableModel>(dt);
+        tbManga.setRowSorter(sorter);
         //Haetaan tiedot tietokannasta ja lisätään ne taulukkoon
         ResultSet rset = db.getData("SELECT * FROM MANGA");
 
@@ -1356,7 +1360,10 @@ public class MangaKirjasto extends javax.swing.JFrame {
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
 
-        tbManga.setAutoCreateRowSorter(true);
+        TableRowSorter<TableModel> sorter;
+        sorter = new TableRowSorter<TableModel>(dt);
+        tbManga.setRowSorter(sorter);
+
         String valittu = (String) comboMgHaku.getSelectedItem();
         String hakuehto = txtMgHaku.getText();
 
@@ -1376,10 +1383,13 @@ public class MangaKirjasto extends javax.swing.JFrame {
 
     //MGKIRJASTO
     private void tableload2(JTable jt2) throws ClassNotFoundException, SQLException {
-        DefaultTableModel dt2 = (DefaultTableModel) jt2.getModel();
+        DefaultTableModel dt = (DefaultTableModel) jt2.getModel();
         //Asetetaan rivit aloittamaan 0
-        dt2.setRowCount(0);
-        tbKirjasto.setAutoCreateRowSorter(true);
+        dt.setRowCount(0);
+         TableRowSorter<TableModel> sorter;
+        sorter = new TableRowSorter<TableModel>(dt);
+        tbKirjasto.setRowSorter(sorter);
+
         //Haetaan tiedot tietokannasta ja lisätään ne taulukkoon
         ResultSet rset = db.getData("SELECT MGKIRJASTO.KIRJASTOID, MANGA.NIMI, MANGA.TEKIJA, MANGA.KUSTANTAJA, MANGA.KIELI, MGKIRJASTO.NRO "
                 + "FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID");
@@ -1393,7 +1403,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
             v.add(rset.getString(5));
             v.add(rset.getString(6));
 
-            dt2.addRow(v);
+            dt.addRow(v);
         }
     }
 
@@ -1422,7 +1432,10 @@ public class MangaKirjasto extends javax.swing.JFrame {
         //Asetetaan rivit aloittamaan 0
         dt.setRowCount(0);
 
-        tbKirjasto.setAutoCreateRowSorter(true);
+         TableRowSorter<TableModel> sorter;
+        sorter = new TableRowSorter<TableModel>(dt);
+        tbKirjasto.setRowSorter(sorter);
+
         String valittu = (String) comboKjsHaku.getSelectedItem();
         String hakuehto = txtKjsHaku.getText();
 
