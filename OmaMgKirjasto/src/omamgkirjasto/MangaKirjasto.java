@@ -789,7 +789,6 @@ public class MangaKirjasto extends javax.swing.JFrame {
                         + "values('" + txtMgNimi.getText() + "','" + txtMgTekija.getText() + "','" + txtMgKustantaja.getText()
                         + "','" + txtMgKieli.getText() + "')");
 
-                System.out.println("Alkaa22");
                 /**
                  * Tyhjennetään tekstikentät ladataan uudestaan taulukot,
                  * valikot ja id:t-tekstikenttiin. Asetetaan Manga välilehti
