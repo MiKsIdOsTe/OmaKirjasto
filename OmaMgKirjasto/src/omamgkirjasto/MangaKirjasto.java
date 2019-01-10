@@ -837,7 +837,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
             rset = db.getData("SELECT * FROM MANGA where ID= " + valittuID);
             //Valitaan valikosta taulukon valittu rivi
             while (rset.next()) {
-                comboManga.setSelectedItem(rset.getInt("ID") + ", " + rset.getString("NIMI") + ", " + rset.getString("KIELI"));
+                comboManga.setSelectedItem(rset.getInt("ID") + " " + rset.getString("NIMI") + " " + rset.getString("KIELI"));
             }
             //Tyhjennetään txtKjsNro tekstikenttä
             txtKjsNro.setText(null);
@@ -1137,7 +1137,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
             ResultSet rset = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID WHERE KIRJASTOID= " + valittuKjsID + "");
             //Lisätään tiedot comboManga-valikkoon
             while (rset.next()) {
-                comboManga.setSelectedItem(rset.getInt("ID_MANGA") + " , " + rset.getString("NIMI") + " , " + rset.getString("KIELI"));
+                comboManga.setSelectedItem(rset.getInt("ID_MANGA") + " " + rset.getString("NIMI") + " " + rset.getString("KIELI"));
                 //Lisätään txtMgID-kenttään Manga ID 
                 txtMgID.setText(rset.getString("ID"));
             }
@@ -1146,7 +1146,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
             ResultSet rset2 = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID WHERE KIRJASTOID= " + valittuKjsID + "");
             //Lisätään tiedot comboKirjasto-valikkoon
             while (rset2.next()) {
-                comboKirjasto.setSelectedItem(rset2.getInt("KIRJASTOID") + " , " + rset2.getString("NIMI") + " , " + rset2.getString("NRO"));
+                comboKirjasto.setSelectedItem(rset2.getInt("KIRJASTOID") + " " + rset2.getString("NIMI") + " " + rset2.getString("NRO"));
             }
 
         } catch (ClassNotFoundException ex) {
@@ -1491,7 +1491,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
         //Haetaan tiedot tietokannasta ja lisätään ne valintaComboon. 
         ResultSet rset = db.getData("SELECT * FROM MANGA");
         while (rset.next()) {
-            String pat = rset.getInt("ID") + " , " + rset.getString("NIMI") + " , " + rset.getString("KIELI");
+            String pat = rset.getInt("ID") + " " + rset.getString("NIMI") + " " + rset.getString("KIELI");
             comboManga.addItem(pat);
         }
     }
@@ -1580,7 +1580,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
         //Haetaan tiedot tietokannasta ja lisätään ne valintaComboon. 
         ResultSet rset = db.getData("SELECT * FROM MGKIRJASTO INNER JOIN MANGA ON MGKIRJASTO.ID_MANGA = MANGA.ID");
         while (rset.next()) {
-            String pat = rset.getInt("KIRJASTOID") + " , " + rset.getString("NIMI") + " , " + rset.getString("NRO");
+            String pat = rset.getInt("KIRJASTOID") + " " + rset.getString("NIMI") + " " + rset.getString("NRO");
             comboKirjasto.addItem(pat);
         }
     }
