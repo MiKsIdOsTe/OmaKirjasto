@@ -36,7 +36,6 @@ public class Etusivu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(51, 51, 51));
 
         btManga.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btManga.setText("Omat mangat");
