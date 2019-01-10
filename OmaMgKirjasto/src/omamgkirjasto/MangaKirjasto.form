@@ -994,7 +994,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                  <Component id="jLabel8" min="-2" pref="406" max="-2" attributes="0"/>
+                  <Component id="lblOtsikko" min="-2" pref="406" max="-2" attributes="0"/>
                   <EmptySpace pref="122" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -1003,14 +1003,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel8" max="32767" attributes="0"/>
+                  <Component id="lblOtsikko" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="lblOtsikko">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial Black" size="48" style="0"/>

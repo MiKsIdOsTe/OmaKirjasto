@@ -120,7 +120,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
         btKjsHae = new javax.swing.JButton();
         btKjsTyhjenna = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        lblOtsikko = new javax.swing.JLabel();
         btValikko = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -705,8 +705,8 @@ public class MangaKirjasto extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jLabel8.setFont(new java.awt.Font("Arial Black", 0, 48)); // NOI18N
-        jLabel8.setText("Manga kirjasto");
+        lblOtsikko.setFont(new java.awt.Font("Arial Black", 0, 48)); // NOI18N
+        lblOtsikko.setText("Manga kirjasto");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -714,14 +714,14 @@ public class MangaKirjasto extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(122, 122, 122)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblOtsikko, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblOtsikko, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -837,7 +837,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
             rset = db.getData("SELECT * FROM MANGA where ID= " + valittuID);
             //Valitaan valikosta taulukon valittu rivi
             while (rset.next()) {
-                comboManga.setSelectedItem(rset.getInt("ID") + " , " + rset.getString("NIMI") + " , " + rset.getString("KIELI"));
+                comboManga.setSelectedItem(rset.getInt("ID") + ", " + rset.getString("NIMI") + ", " + rset.getString("KIELI"));
             }
             //Tyhjennetään txtKjsNro tekstikenttä
             txtKjsNro.setText(null);
@@ -1407,7 +1407,6 @@ public class MangaKirjasto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -1427,6 +1426,7 @@ public class MangaKirjasto extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblKjsRivi;
     private javax.swing.JLabel lblMgRivi;
+    private javax.swing.JLabel lblOtsikko;
     private javax.swing.JTable tbKirjasto;
     private javax.swing.JTable tbManga;
     private javax.swing.JTextField txtKjsHaku;
